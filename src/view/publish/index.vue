@@ -23,17 +23,15 @@
                 </el-form-item>
                 <el-form-item label="房屋地址">
                   <el-col :span="11">
-                    <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-                  </el-col>
-                  <el-col class="line" :span="2">-</el-col>
-                  <el-col :span="11">
-                    <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+                    <el-input v-model="form.name"></el-input>
                   </el-col>
                 </el-form-item>
                 <el-form-item label="期望租金">
-                  <el-switch v-model="form.delivery"></el-switch>
+                  <el-col :span="7">
+                    <el-input v-model="form.name"></el-input>
+                  </el-col>
                 </el-form-item>
-                <el-form-item label="出租方式">
+                <el-form-item label="配套设施">
                   <el-checkbox-group v-model="form.type">
                     <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
                     <el-checkbox label="地推活动" name="type"></el-checkbox>
@@ -48,10 +46,9 @@
                   </el-radio-group>
                 </el-form-item>
                 <el-form-item label="手机号码">
-                  <el-input type="textarea" v-model="form.desc"></el-input>
-                </el-form-item>
-                <el-form-item label="图形验证码">
-                  <el-input type="textarea" v-model="form.code"></el-input>
+                  <el-col :span="11">
+                    <el-input v-model="form.name"></el-input>
+                  </el-col>
                 </el-form-item>
                 <el-form-item>
                   <el-button type="success" @click="onSubmit">立即创建</el-button>
@@ -62,15 +59,18 @@
           </el-row>
         </el-main>
       </el-container>
+      <cfooter></cfooter>
     </div>
 </template>
 
 <script>
     import cheader from "@/components/cheader";
+    import cfooter from "@/components/cfooter";
     export default {
         name: "index",
         components :{
-            cheader
+            cheader,
+            cfooter
         },
         data() {
             return{

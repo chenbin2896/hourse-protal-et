@@ -1,10 +1,11 @@
 <template>
   <div>
     <cheader></cheader>
-    <el-container>
+    <!--    <el-container style="background-image: url('../../assets/img/bannerV2.jpg');background-repeat: no-repeat;">-->
+    <el-container class="bg">
       <el-main style="padding-top:80px;">
         <el-row type="flex" justify="space-around">
-          <el-col :span="10" >
+          <el-col :span="10">
             <div>
               <h3>欢迎注册</h3>
               <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -21,7 +22,7 @@
               </el-form>
             </div>
           </el-col>
-          <el-col :span="10" >
+          <el-col :span="10">
             <div>
               <h3>立即登录</h3>
               <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -42,67 +43,85 @@
       </el-main>
 
     </el-container>
+    <cfooter></cfooter>
   </div>
 </template>
 <script>
-    import cheader from "@/components/cheader";
-    export default {
-        name: "login",
-        components: {
-            cheader
+  import cheader from "@/components/cheader";
+  import cfooter from "@/components/cfooter";
+
+  export default {
+    name: "login",
+    components: {
+      cheader,
+      cfooter
+    },
+    data() {
+      return {
+        ruleForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
         },
-        data() {
-            return {
-                ruleForm: {
-                    name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
-                },
-                rules: {
-                    name: [
-                        { required: true, message: '请输入活动名称', trigger: 'blur' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-                    ],
-                    region: [
-                        { required: true, message: '请选择活动区域', trigger: 'change' }
-                    ],
-                    date1: [
-                        { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-                    ],
-                    date2: [
-                        { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-                    ],
-                    type: [
-                        { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-                    ],
-                    resource: [
-                        { required: true, message: '请选择活动资源', trigger: 'change' }
-                    ],
-                    desc: [
-                        { required: true, message: '请填写活动形式', trigger: 'blur' }
-                    ]
-                }
-            };
-        },
-        methods: {
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
-            }
+        rules: {
+          name: [
+            {required: true, message: '请输入活动名称', trigger: 'blur'},
+            {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+          ],
+          region: [
+            {required: true, message: '请选择活动区域', trigger: 'change'}
+          ],
+          date1: [
+            {type: 'date', required: true, message: '请选择日期', trigger: 'change'}
+          ],
+          date2: [
+            {type: 'date', required: true, message: '请选择时间', trigger: 'change'}
+          ],
+          type: [
+            {type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change'}
+          ],
+          resource: [
+            {required: true, message: '请选择活动资源', trigger: 'change'}
+          ],
+          desc: [
+            {required: true, message: '请填写活动形式', trigger: 'blur'}
+          ]
         }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
     }
+  }
 </script>
+
+<style>
+  .bg {
+    background-image: url("~@/assets/img/bannerV2.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 700px;
+    color: #E9EEF3;
+  }
+
+  .el-form-item__label {
+    color: #E9EEF3;
+  }
+</style>

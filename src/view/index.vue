@@ -6,63 +6,42 @@
         <el-main style="margin-left:50px; ">
           <el-row style="margin-bottom: 50px;">
             <el-col :span="10" :offset="3" style="height: 40px;margin-top:30px;">
-              <el-input v-model="input" placeholder="请输入区域、商圈或小区名开始找房"><i slot="suffix" class="el-input__icon el-icon-search"></i></el-input>
-            </el-col>
-          </el-row>
-         <el-row>
-           <el-col :span="24">
-             <span>按区域</span>
-             <el-link :underline="false" style="font-weight: bold">不限</el-link>
-             <el-link :underline="false" >无下划线</el-link>
-             <el-link :underline="false">无下划线</el-link>
-             <el-link :underline="false">无下划线</el-link>
-           </el-col>
-         </el-row>
-          <el-row>
-            <el-col :span="24">
-              <span>方式</span>
-              <el-link :underline="false" style="font-weight: bold">不限</el-link>
-              <el-link :underline="false" >无下划线</el-link>
-              <el-link :underline="false">无下划线</el-link>
-              <el-link :underline="false">无下划线</el-link>
+              <el-input v-model="input" placeholder="请输入区域、商圈或小区名开始找房"><i slot="suffix"
+                                                                          class="el-input__icon el-icon-search"></i>
+              </el-input>
             </el-col>
           </el-row>
           <el-row>
-            <el-col :span="24">
-              <span>租金</span>
-              <el-link :underline="false" style="font-weight: bold">不限</el-link>
-              <el-radio-group v-model="radioResult">
-                <el-radio :label="3">备选项</el-radio>
-                <el-radio :label="6">备选项</el-radio>
-                <el-radio :label="9">备选项</el-radio>
-              </el-radio-group>
-            </el-col>
+            <el-form ref="form" :model="form" label-width="80px" label-position="left">
+              <el-form-item label="按区域">
+                <el-checkbox-group v-model="form.type">
+                  <el-checkbox label="小店区" name="type"></el-checkbox>
+                  <el-checkbox label="地推活动" name="type"></el-checkbox>
+                  <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+                  <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
+              <el-form-item label="方式">
+                <el-checkbox-group v-model="form.type">
+                  <el-checkbox label="整租" name="type"></el-checkbox>
+                  <el-checkbox label="合租" name="type"></el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
+              <el-form-item label="租金">
+                <el-checkbox-group v-model="form.type">
+                  <el-checkbox label="2000-3000" name="type"></el-checkbox>
+                  <el-checkbox label="3000-5000" name="type"></el-checkbox>
+                  <el-checkbox label="5000-7000" name="type"></el-checkbox>
+                  <el-checkbox label="7000以上" name="type"></el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
+
+            </el-form>
           </el-row>
-          <el-row>
-            <el-col :span="24">
-              <span>租金</span>
-              <el-link :underline="false" style="font-weight: bold">不限</el-link>
-              <el-radio-group v-model="radioResult">
-                <el-radio :label="3">备选项</el-radio>
-                <el-radio :label="6">备选项</el-radio>
-                <el-radio :label="9">备选项</el-radio>
-              </el-radio-group>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <span>租金</span>
-              <el-link :underline="false" style="font-weight: bold">不限</el-link>
-              <el-radio-group v-model="radioResult">
-                <el-radio :label="3">备选项</el-radio>
-                <el-radio :label="6">备选项</el-radio>
-                <el-radio :label="9">备选项</el-radio>
-              </el-radio-group>
-            </el-col>
-          </el-row>
+
           <el-divider>
           </el-divider>
-          <el-row>
+          <el-row style="margin-top: 50px;">
             <el-col>
               <span>已为您找到<span style="color: darkgreen"> 8</span>套房</span>
             </el-col>
@@ -75,16 +54,26 @@
                     <el-col :span="3" style="height: 180px;margin-right:20px;border: 1px red solid"></el-col>
                     <el-col :span="10" style="height: 180px;margin-right:20px;border: 1px red solid">
                       <el-row style="height: 40px;">
-                        <el-link @click="info(1)" :underline="false" style="font-size: 18px;font-weight: bold">整租>开阳里七区 1室厅 东/西</el-link>
+                        <el-link @click="info(1)" :underline="false" style="font-size: 18px;font-weight: bold">整租>开阳里七区
+                          1室厅 东/西
+                        </el-link>
                       </el-row>
                       <el-row style="height: 40px;">
                         <el-link :underline="false">整租>开阳里七区 1室厅 东/西</el-link>
                       </el-row>
                       <el-row style="height: 60px;line-height: 60px;">
-                        <el-link :underline="false"><el-tag size="mini">标签一</el-tag></el-link>
-                        <el-link :underline="false"><el-tag size="mini">标签一</el-tag></el-link>
-                        <el-link :underline="false"><el-tag size="mini">标签一</el-tag></el-link>
-                        <el-link :underline="false"><el-tag size="mini">标签一</el-tag></el-link>
+                        <el-link :underline="false">
+                          <el-tag size="mini">标签一</el-tag>
+                        </el-link>
+                        <el-link :underline="false">
+                          <el-tag size="mini">标签一</el-tag>
+                        </el-link>
+                        <el-link :underline="false">
+                          <el-tag size="mini">标签一</el-tag>
+                        </el-link>
+                        <el-link :underline="false">
+                          <el-tag size="mini">标签一</el-tag>
+                        </el-link>
 
                       </el-row>
                       <el-row style="height: 40px;line-height: 40px;">
@@ -96,7 +85,7 @@
 
                     </el-col>
                     <el-col :span="5" style="height: 180px;border: 1px red solid">
-                        <span style="font-size:28px;color: darkgreen">5000<span>元/月</span></span>
+                      <span style="font-size:28px;color: darkgreen">5000<span>元/月</span></span>
                     </el-col>
                   </el-row>
                 </el-tab-pane>
@@ -196,45 +185,67 @@
       </el-container>
 
     </div>
+    <cfooter></cfooter>
   </div>
 
 </template>
 
 <script>
   import cheader from "../components/cheader";
-    export default {
-        name: "index",
+  import cfooter from "@/components/cfooter";
 
-        components : {
-            cheader
-        },
-        data () {
-            return{
-                radioResult:'',
-                activeName: 'first'
-            }
-        },
-        methods: {
-            handleClick(tab, event) {
-                console.log(tab, event);
-            },
-            info(id){
-                this.$router.push({path:'/info/'+id})
-            }
+  export default {
+    name: "index",
+
+    components: {
+      cheader,
+      cfooter
+    },
+    data() {
+      return {
+        input: '',
+        radioResult: '',
+        activeName: 'first',
+        checkList: [],
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
         }
-
+      }
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      },
+      info(id) {
+        this.$router.push({path: '/info/' + id})
+      }
     }
+
+  }
 </script>
 
 <style scoped>
-  .el-link{
+
+  .el-link {
     margin: 10px;
   }
-  .el-radio{
+
+  .el-radio {
     margin: 10px;
   }
-  span{
+
+  span {
     font-size: 14px;
     font-weight: bold;
+  }
+  .el-form-item{
+    margin-bottom: 0px;
   }
 </style>

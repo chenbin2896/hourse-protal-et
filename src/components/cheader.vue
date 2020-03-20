@@ -11,7 +11,6 @@
             <el-menu-item index="3">合租</el-menu-item>
             <el-menu-item index="/publish">发布房源</el-menu-item>
             <el-menu-item index="5">下载APP</el-menu-item>
-            <el-menu-item index="6">违法群租举报</el-menu-item>
 
             <el-menu-item index="/logout" style="float: right">退出</el-menu-item>
             <el-submenu index="person" style="float: right">

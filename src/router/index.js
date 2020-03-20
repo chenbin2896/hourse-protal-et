@@ -22,6 +22,12 @@ export default new Router({
       hidden: true
     },
     {
+      path: '/cfooter',
+      name: 'cfooter',
+      component: ()=>import('@/components/cfooter'),
+      hidden: true
+    },
+    {
       path: '/publish',
       name: 'publish',
       component: ()=>import('@/view/publish/index'),
@@ -31,6 +37,30 @@ export default new Router({
       path: '/info/:id',
       name: 'info',
       component: ()=>import('@/view/info/index'),
+      hidden: true
+    },
+    {
+      path: '/app/index',
+      name: 'app',
+      component: ()=>import('@/view/app/index'),
+      hidden: true
+    },
+    {
+      path: '/app/message',
+      name: 'message',
+      component: ()=>import('@/view/app/message'),
+      hidden: true
+    },
+    {
+      path: '/app/house',
+      name: 'message',
+      component: ()=>import('@/view/app/house'),
+      hidden: true
+    },
+    {
+      path: '/app/mine',
+      name: 'message',
+      component: ()=>import('@/view/app/mine'),
       hidden: true
     }
 

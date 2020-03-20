@@ -151,7 +151,7 @@
               </el-col>
             </el-row>
           </el-row>
-          <el-row>
+          <el-row style="margin-bottom: 20px">
             <h2>费用详情</h2>
             <el-row>
               <h4>年租价 当租期不足1年时租金可能会上浮，详询管家</h4>
@@ -171,24 +171,82 @@
               <el-col :span="4">3300</el-col>
             </el-row>
           </el-row>
+          <el-row>
+            <h2>推荐经纪人</h2><span>您可以通过拨打电话或在线咨询的方式联系经纪人</span>
+            <el-row style="line-height: 44px;margin-top: 20px;">
+              <el-col :span="8">
+                <el-card shadow="never">
+                  <el-row>
+                    <el-col :span="6">
+                      <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="width: 100px;height: 170px;">
+                    </el-col>
+                    <el-col :span="12">
+                      <span>张惠铭</span><br>
+                      <span>评分:4.5 | 20次评价</span>
+                      <span>4008896805转88073</span>
+                      <span><el-button type="success">在线咨询</el-button></span>
+                    </el-col>
+                  </el-row>
+                </el-card>
+              </el-col>
+              <el-col :span="8">
+                <el-card shadow="never">
+                  <el-row>
+                    <el-col :span="6">
+                      <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="width: 100px;height: 170px;">
+                    </el-col>
+                    <el-col :span="10">
+                      <span>张惠铭</span><br>
+                      <span>评分:4.5 | 20次评价</span>
+                      <span>4008896805转88073</span>
+                      <span><el-button type="success">在线咨询</el-button></span>
+                    </el-col>
+                  </el-row>
+                </el-card>
+              </el-col>
+            </el-row>
+            <el-row>
+              <h2>地址和交通</h2>
+              <el-row>
+                <baidu-map style="width: 100%;height: 300px" :center="center" :zoom="zoom" @ready="handler">
+                </baidu-map>
+              </el-row>
+            </el-row>
+          </el-row>
         </el-main>
+
       </el-container>
+
     </div>
+
+
 </template>
 
-<script>
+<script type="text/javascript">
   import cheader from "@/components/cheader";
+  import BMap from 'BMap'
     export default {
         name: "index",
+        data () {
+            return {
+                center: {lng: 0, lat: 0},
+                zoom: 3
+            }
+        },
         methods :{
-
+            handler ({BMap, map}) {
+                console.log(BMap, map)
+                this.center.lng = 116.404
+                this.center.lat = 39.915
+                this.zoom = 15
+            }
         },
         components:{
             cheader
         },
         mounted() {
             console.log(this.$route.params.id)
-        }
+        },
     }
 </script>
 
