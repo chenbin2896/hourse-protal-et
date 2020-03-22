@@ -33,7 +33,7 @@
 <script>
     import BMap from 'BMap'
     export default {
-        name: "cheader",
+        name: "oldheader",
         data() {
             return {
                 city:'',

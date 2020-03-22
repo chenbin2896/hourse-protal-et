@@ -226,7 +226,7 @@
   import cheader from "@/components/cheader";
   import BMap from 'BMap'
     export default {
-        name: "index",
+        name: "info",
         data () {
             return {
                 center: {lng: 0, lat: 0},
