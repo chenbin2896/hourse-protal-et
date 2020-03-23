@@ -4,17 +4,17 @@
         <el-header>
           <el-row class="cheader" type="flex" justify="center">
 
-            <el-col :span="2" style="font-size: 32px;cursor: pointer">万径房产
+            <el-col :span="4" style="font-size: 32px;cursor: pointer">万径房产
             </el-col>
-            <el-col :span="1"><span><i  class="el-input__icon el-icon-location-outline"></i>{{city}}</span></el-col>
+            <el-col :span="2"><span><i  class="el-input__icon el-icon-location-outline"></i>{{city}}</span></el-col>
             <el-col :span="1" :offset="2" style="cursor: pointer" ><span @click="send('/newHouse')">新房</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/oldHouse')">二手房</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/rentHouse')">租房</span></el-col>
-            <el-col :span="1" style="cursor: pointer"><span @click="send('/businessHouse')">商业办公</span></el-col>
+            <el-col :span="2" style="cursor: pointer"><span @click="send('/businessHouse')">商业办公</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/agent')">经纪人</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/housePrice')">房价</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/tool')">工具</span></el-col>
-            <el-col :span="1" style="cursor: pointer"><span @click="send('/publish')">发布房源</span></el-col>
+            <el-col :span="2" style="cursor: pointer"><span @click="send('/publish')">发布房源</span></el-col>
           </el-row>
         </el-header>
         <el-main style="padding-top: 100px;">
