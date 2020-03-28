@@ -11,7 +11,7 @@
           <el-col :span="1" style="cursor: pointer"><span @click="send('/oldHouse')">楼盘</span></el-col>
           <el-col :span="1" style="cursor: pointer"><span @click="send('/rentHouse')">在售</span></el-col>
           <el-col :span="1" style="cursor: pointer"><span @click="send('/businessHouse')">地图找房</span></el-col>
-          <el-col :span="4" :offset="4" style="cursor: pointer;color: #00ae66;"><span @click="send('/businessHouse')">客服热线234242343</span></el-col>
+          <el-col :span="4" :offset="4" style="cursor: pointer;color: #00ae66;"><span @click="send('/businessHouse')" style="color: #00ae66;">客服热线234242343</span></el-col>
         </el-row>
       </el-header>
       <el-main>
@@ -27,42 +27,143 @@
         <el-row style="text-align: center;">
           <h1>精选楼盘</h1>
         </el-row>
-        <el-row style="width: 80%;margin: 0 auto" :gutter="20">
-          <el-col :span="12">
-            <el-col :span="8">
-              <el-image></el-image>
-            </el-col>
-            <el-col :span="16">
-              <el-image></el-image>
-            </el-col>
+        <el-row style="width: 60%;margin: 0 auto" :gutter="20">
+          <el-col :span="12" >
+            <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
+              <el-col :span="9" style="height: 180px;padding: 0px">
+                <el-image :src="testImage" style="height: 100%;"></el-image>
+              </el-col>
+              <el-col :span="13" style="padding-left: 20px">
+                <h2 style="line-height: 40px">龙投远洋</h2>
+                <b style="line-height: 30px">建面141-191</b><br>
+                <b style="line-height: 30px">建面141-191</b>
+              </el-col>
+            </el-row>
+
           </el-col>
-          <el-col :span="12">
-            sdadfasdfasdf
+          <el-col :span="12" >
+            <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
+              <el-col :span="9" style="height: 180px;padding: 0px">
+                <el-image :src="testImage" style="height: 100%;"></el-image>
+              </el-col>
+              <el-col :span="13" style="padding-left: 20px">
+                <h2 style="line-height: 40px">龙投远洋</h2>
+                <b style="line-height: 30px">建面141-191</b><br>
+                <b style="line-height: 30px">建面141-191</b>
+              </el-col>
+            </el-row>
+
           </el-col>
+          <el-col :span="12" >
+            <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
+              <el-col :span="9" style="height: 180px;padding: 0px">
+                <el-image :src="testImage" style="height: 100%;"></el-image>
+              </el-col>
+              <el-col :span="13" style="padding-left: 20px">
+                <h2 style="line-height: 40px">龙投远洋</h2>
+                <b style="line-height: 30px">建面141-191</b><br>
+                <b style="line-height: 30px">建面141-191</b>
+              </el-col>
+            </el-row>
+
+          </el-col><el-col :span="12" >
+          <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
+            <el-col :span="9" style="height: 180px;padding: 0px">
+              <el-image :src="testImage" style="height: 100%;"></el-image>
+            </el-col>
+            <el-col :span="13" style="padding-left: 20px">
+              <h2 style="line-height: 40px">龙投远洋</h2>
+              <b style="line-height: 30px">建面141-191</b><br>
+              <b style="line-height: 30px">建面141-191</b>
+            </el-col>
+          </el-row>
+
+        </el-col>
+
+
+
+
         </el-row>
         <el-row style="text-align: center;">
           <h1>推荐楼盘</h1>
         </el-row>
-        <el-row style="width: 80%;margin: 0 auto" :gutter="20">
-          <el-col :span="12">
-            sdadfasdfasdf
+        <el-row style="width: 60%;margin: 0 auto" :gutter="20">
+          <el-col :span="12" >
+            <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
+              <el-col :span="9" style="height: 180px;padding: 0px">
+                <el-image :src="testImage" style="height: 100%;"></el-image>
+              </el-col>
+              <el-col :span="13" style="padding-left: 20px">
+                <h2 style="line-height: 40px">龙投远洋</h2>
+                <b style="line-height: 30px">建面141-191</b><br>
+                <b style="line-height: 30px">建面141-191</b>
+              </el-col>
+            </el-row>
+
           </el-col>
-          <el-col :span="12">
-            sdadfasdfasdf
+          <el-col :span="12" >
+            <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
+              <el-col :span="9" style="height: 180px;padding: 0px">
+                <el-image :src="testImage" style="height: 100%;"></el-image>
+              </el-col>
+              <el-col :span="13" style="padding-left: 20px">
+                <h2 style="line-height: 40px">龙投远洋</h2>
+                <b style="line-height: 30px">建面141-191</b><br>
+                <b style="line-height: 30px">建面141-191</b>
+              </el-col>
+            </el-row>
+
           </el-col>
+          <el-col :span="12" >
+            <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
+              <el-col :span="9" style="height: 180px;padding: 0px">
+                <el-image :src="testImage" style="height: 100%;"></el-image>
+              </el-col>
+              <el-col :span="13" style="padding-left: 20px">
+                <h2 style="line-height: 40px">龙投远洋</h2>
+                <b style="line-height: 30px">建面141-191</b><br>
+                <b style="line-height: 30px">建面141-191</b>
+              </el-col>
+            </el-row>
+
+          </el-col><el-col :span="12" >
+          <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
+            <el-col :span="9" style="height: 180px;padding: 0px">
+              <el-image :src="testImage" style="height: 100%;"></el-image>
+            </el-col>
+            <el-col :span="13" style="padding-left: 20px">
+              <h2 style="line-height: 40px">龙投远洋</h2>
+              <b style="line-height: 30px">建面141-191</b><br>
+              <b style="line-height: 30px">建面141-191</b>
+            </el-col>
+          </el-row>
+
+        </el-col>
+
+
+
+
         </el-row>
       </el-main>
     </el-container>
+    <cfooter></cfooter>
   </div>
 </template>
 
 <script>
   import newheader from '@/components/newheader';
+  import cfooter from '@/components/cfooter';
 
   export default {
     name: "index",
     components: {
-      newheader: newheader
+      newheader: newheader,
+      cfooter: cfooter
+    },
+    data() {
+      return{
+        testImage:'https://image1.ljcdn.com/140100-inspection/pc1_xM9mHQPVj_1.jpg.296x216.jpg'
+      }
     },
     methods: {
       send(path) {

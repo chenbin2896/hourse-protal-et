@@ -176,7 +176,7 @@
         </el-main>
 
       </el-container>
-      <el-row class="cfooter">
+      <el-row class="cefooter">
         <el-col :span="10" :offset="4">
           <el-row>
             <h1 style="color: #fff;font-size: 50px;">万径真实房源</h1>
@@ -184,13 +184,18 @@
           <el-row style="color: #fff;font-size: 30px">不是嘴上说说就可以</el-row>
         </el-col>
       </el-row>
+      <cfooter></cfooter>
     </div>
 </template>
 
 <script>
     import BMap from 'BMap'
+    import cfooter from '@/components/cfooter';
     export default {
       name: "index",
+      components: {
+        cfooter: cfooter
+      },
       data() {
         return {
           city:'',
@@ -198,7 +203,7 @@
           activeIndex2: '1',
           searchContent: '',
           getDownloadImage:'https://ajax.api.lianjia.com/qr/getDownloadQr?location=site_middle&ljweb_channel_key=site_index',
-          ershouImage:'https://image1.ljcdn.com/110000-inspection/prod-956112a7-641b-495d-acfb-0d09c1f018ed.jpg.280x210.jpg'
+          ershouImage:'https://image1.ljcdn.com/140100-inspection/pc1_xM9mHQPVj_1.jpg.296x216.jpg'
         };
       },
       mounted () {
@@ -224,7 +229,7 @@
     }
 </script>
 
-<style>
+<style scoped>
   .cbody{
     background-image: url("../../assets/img/bannerV2.jpg");
     width: 100%;
@@ -256,7 +261,7 @@
     border: none;
     border-radius: 0px
   }
-  .cfooter{
+  .cefooter{
     width: 100%;
     height: 260px;
     background-image: url("../../assets/img/truth-bgV2.jpg");
