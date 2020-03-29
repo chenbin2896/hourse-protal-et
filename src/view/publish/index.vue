@@ -1,75 +1,110 @@
 <template>
     <div>
-      <cheader></cheader>
-      <el-container>
-        <el-main >
-          <el-row style="text-align: center">
-            <el-col :span="24">
-              <h2>发布出租房源</h2>
-              <h4>数万线下门店 · 快速全城推广 · 专业经纪人服务</h4>
-            </el-col>
-          </el-row>
+      <newheader></newheader>
+      <div style="height: 220px;background: #f5f5f6;width: 100%">
+        <div style="width: 60%;margin:  0 auto;">
           <el-row>
-            <el-col :span="12" :offset="6">
-              <el-form ref="form" :model="form" label-width="100px">
-                <el-form-item label="小区所在城市">
-                  <el-input v-model="form.name"></el-input>
-                </el-form-item>
-                <el-form-item label="小区名称">
-                  <el-select v-model="form.region" placeholder="请选择活动区域">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="房屋地址">
-                  <el-col :span="11">
-                    <el-input v-model="form.name"></el-input>
-                  </el-col>
-                </el-form-item>
-                <el-form-item label="期望租金">
-                  <el-col :span="7">
-                    <el-input v-model="form.name"></el-input>
-                  </el-col>
-                </el-form-item>
-                <el-form-item label="配套设施">
-                  <el-checkbox-group v-model="form.type">
-                    <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-                    <el-checkbox label="地推活动" name="type"></el-checkbox>
-                    <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-                    <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-                  </el-checkbox-group>
-                </el-form-item>
-                <el-form-item label="称呼">
-                  <el-radio-group v-model="form.resource">
-                    <el-radio label="线上品牌商赞助"></el-radio>
-                    <el-radio label="线下场地免费"></el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="手机号码">
-                  <el-col :span="11">
-                    <el-input v-model="form.name"></el-input>
-                  </el-col>
-                </el-form-item>
-                <el-form-item>
-                  <el-button type="success" @click="onSubmit">立即创建</el-button>
-                  <el-button>取消</el-button>
-                </el-form-item>
-              </el-form>
+            <el-col :span="5">
+              <h2 style="color: #00ae66;">万径</h2>
+            </el-col>
+            <el-col :span="14" style="text-align: center;padding-top: 70px">
+              <h1>发布出售房源</h1>
+              <span>8000+全国链家门店·10万+全国经纪人·链家倾情服务15年+</span>
+            </el-col>
+            <el-col :span="5" style="text-align: right">
+              <span style="line-height: 70px">下载万径APP</span>
             </el-col>
           </el-row>
-        </el-main>
-      </el-container>
+
+        </div>
+
+      </div>
+      <div style="width: 50%;margin:  0 auto;padding-top: 30px">
+            <el-row style="padding-top: 20px" :gutter="40">
+              <el-col :span="12">
+                <el-form ref="form" :model="form" label-width="80px">
+                  <el-form-item label="贷款类型">
+                    <el-select v-model="form.region" placeholder="请选择活动区域">
+                      <el-option label="区域一" value="shanghai"></el-option>
+                      <el-option label="区域二" value="beijing"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item label="计算方式">
+                    <el-select v-model="form.region" placeholder="请选择活动区域">
+                      <el-option label="区域一" value="shanghai"></el-option>
+                      <el-option label="区域二" value="beijing"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item label="商贷金额">
+                    <el-input type="number" v-model="form.desc"></el-input>
+                  </el-form-item>
+                  <el-form-item label="商贷利率方式">
+                    <el-select v-model="form.region" placeholder="请选择活动区域">
+                      <el-option label="区域一" value="shanghai"></el-option>
+                      <el-option label="区域二" value="beijing"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item label="LPR">
+                    <el-input type="number" v-model="form.desc"></el-input>
+                  </el-form-item>
+                  <el-form-item label="基点">
+                    <el-input type="number" v-model="form.desc"></el-input>
+                  </el-form-item>
+                  <el-form-item label="商贷利率">
+                    <el-input type="text" v-model="form.desc"></el-input>
+                  </el-form-item>
+                  <el-form-item label="商贷年限">
+                    <el-select v-model="form.region" placeholder="请选择活动区域">
+                      <el-option label="区域一" value="shanghai"></el-option>
+                      <el-option label="区域二" value="beijing"></el-option>
+                    </el-select>
+                  </el-form-item>
+
+                </el-form>
+              </el-col>
+              <el-col :span="12">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <el-row>
+                      <el-col :span="8">类型</el-col>
+                      <el-col :span="8">等额本息还款</el-col>
+                      <el-col :span="8">等额本金还款</el-col>
+                    </el-row>
+                  </div>
+                  <el-row class="crow">
+                    <el-col :span="8">类型</el-col>
+                    <el-col :span="8">等额本息还款</el-col>
+                    <el-col :span="8">等额本金还款</el-col>
+                  </el-row>
+                  <el-row class="crow">
+                    <el-col :span="8">类型</el-col>
+                    <el-col :span="8">等额本息还款</el-col>
+                    <el-col :span="8">等额本金还款</el-col>
+                  </el-row>
+                  <el-row class="crow">
+                    <el-col :span="8">类型</el-col>
+                    <el-col :span="8">等额本息还款</el-col>
+                    <el-col :span="8">等额本金还款</el-col>
+                  </el-row>
+                </el-card>
+              </el-col>
+            </el-row>
+            <el-row style="text-align: center;margin-bottom: 50px">
+              <el-button type="success" @click="onSubmit" class="cbtn-bg">提交委托</el-button>
+            </el-row>
+
+      </div>
       <cfooter></cfooter>
     </div>
 </template>
 
 <script>
-    import cheader from "@/components/cheader";
+    import newheader from "@/components/newheader";
     import cfooter from "@/components/cfooter";
     export default {
         name: "index",
         components :{
-            cheader,
+            newheader,
             cfooter
         },
         data() {
@@ -96,5 +131,18 @@
 </script>
 
 <style scoped>
-
+  .el-form-item__label{
+    color: #000000;
+  }
+  .crow{
+    line-height: 30px;
+  }
+  .cbtn-bg{
+    width: 200px;
+    height: 50px;
+    font-size: 18px;
+    background: #00ae66;
+    border: none;
+    border-radius: 0px
+  }
 </style>

@@ -10,7 +10,7 @@
             <el-col :span="1" :offset="2" style="cursor: pointer" ><span @click="send('/newHouse')">新房</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/oldHouse')">二手房</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/rentHouse')">租房</span></el-col>
-            <el-col :span="2" style="cursor: pointer"><span @click="send('/businessHouse')">商业办公</span></el-col>
+            <el-col :span="2" style="cursor: pointer"><span @click="business()">商业办公</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/agent')">经纪人</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/housePrice')">房价</span></el-col>
             <el-col :span="1" style="cursor: pointer"><span @click="send('/tool')">工具</span></el-col>
@@ -25,8 +25,8 @@
 
           </el-row>
           <el-row class="csearch" type="flex" justify="center">
-            <el-col :span="8">
-              <el-input placeholder="请输入内容" v-model="searchContent" class="input" style="border-radius: 0px">
+            <el-col :span="8" >
+              <el-input placeholder="请输入内容" v-model="searchContent" class="input" style="border-radius: 0px;">
 
               </el-input>
             </el-col>
@@ -224,6 +224,9 @@
         },
         send(path){
           this.$router.push({path:path});
+        },
+        business(){
+          window.location.href='https://shangye.lianjia.com/bj/xzl/rent/mlist';
         }
       }
     }
@@ -259,12 +262,20 @@
   .cbtn-bg{
     background: #00ae66;
     border: none;
-    border-radius: 0px
+    border-radius: 0px;
+    height: 50px;
+    width: 140px;
+    font-size: 18px;
   }
   .cefooter{
     width: 100%;
     height: 260px;
     background-image: url("../../assets/img/truth-bgV2.jpg");
+  }
+
+  .input>>>.el-input__inner{
+    height: 50px;
+    border-radius: 0px;
   }
 
 </style>
