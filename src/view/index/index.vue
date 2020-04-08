@@ -4,7 +4,7 @@
         <el-header>
           <el-row class="cheader" type="flex" justify="center">
 
-            <el-col :span="4" style="font-size: 32px;cursor: pointer">万径房产
+            <el-col :span="4" style="font-size: 32px;cursor: pointer;font-weight: bold;font-family: Arial, Helvetica, 'Microsoft YaHei', Tohoma, sans-serif">万径房产
             </el-col>
             <el-col :span="2"><span><i  class="el-input__icon el-icon-location-outline"></i>{{city}}</span></el-col>
             <el-col :span="1" :offset="2" style="cursor: pointer" ><span @click="send('/newHouse')">新房</span></el-col>
@@ -52,10 +52,10 @@
               <el-row>
                 <el-col :span="6">
                   <el-row style="padding-top: 20px;">
-                    <el-button type="success" class="cbtn-bg">iPhone</el-button>
+                    <el-button type="success" class="cbtn-bg" style="width: 100px;height: 40px">iPhone</el-button>
                   </el-row>
                   <el-row style="padding-top: 20px;">
-                    <el-button type="success" class="cbtn-bg">iPhone</el-button>
+                    <el-button type="success" class="cbtn-bg" style="width: 100px;height: 40px">iPhone</el-button>
                   </el-row>
                 </el-col>
                 <el-col :span="12">
@@ -187,8 +187,20 @@
       <cfooter></cfooter>
     </div>
 </template>
-
 <script>
+  (function(m, ei, q, i, a, j, s) {
+    m[i] = m[i] || function() {
+      (m[i].a = m[i].a || []).push(arguments)
+    };
+    j = ei.createElement(q),
+      s = ei.getElementsByTagName(q)[0];
+    j.async = true;
+    j.charset = 'UTF-8';
+    j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+    s.parentNode.insertBefore(j, s);
+  })(window, document, 'script', '_MEIQIA');
+  _MEIQIA('entId', '204239');
+  //_MEIQIA('manualInit');
     import BMap from 'BMap'
     import cfooter from '@/components/cfooter';
     export default {
@@ -203,7 +215,7 @@
           activeIndex2: '1',
           searchContent: '',
           getDownloadImage:'https://ajax.api.lianjia.com/qr/getDownloadQr?location=site_middle&ljweb_channel_key=site_index',
-          ershouImage:'https://image1.ljcdn.com/140100-inspection/pc1_xM9mHQPVj_1.jpg.296x216.jpg'
+          ershouImage:'http://117.51.142.27:9003/5eb404d9-76d8-4048-ad69-24ef1243fa67.jpg'
         };
       },
       mounted () {

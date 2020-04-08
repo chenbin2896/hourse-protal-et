@@ -167,7 +167,7 @@
     },
     data() {
       return{
-        testImage:'https://image1.ljcdn.com/140100-inspection/pc1_xM9mHQPVj_1.jpg.296x216.jpg'
+        testImage:'http://117.51.142.27:9003/5eb404d9-76d8-4048-ad69-24ef1243fa67.jpg'
       }
 
     },

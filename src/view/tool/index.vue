@@ -5,7 +5,7 @@
       <div style="width: 60%;margin:  0 auto;">
         <el-row>
           <el-col :span="5">
-            <h2 style="color: #00ae66;">万径</h2>
+            <h2 style="color: #00ae66;">万径房产</h2>
           </el-col>
           <el-col :span="14" style="text-align: center;padding-top: 100px">
               <h1>购房计算</h1>

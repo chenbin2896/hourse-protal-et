@@ -1,49 +1,35 @@
 <template>
   <div>
-    <cheader></cheader>
-    <!--    <el-container style="background-image: url('../../assets/img/bannerV2.jpg');background-repeat: no-repeat;">-->
-    <el-container class="bg">
-      <el-main style="padding-top:80px;">
-        <el-row type="flex" justify="space-around">
-          <el-col :span="10">
-            <div>
-              <h3>欢迎注册</h3>
-              <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="手机号" prop="name">
-                  <el-input v-model="ruleForm.name" style="width: 40%"></el-input>
-                </el-form-item>
-                <el-form-item label="验证码" prop="region">
-                  <el-input v-model="ruleForm.region" style="width: 40%" placeholder="请选择活动区域"></el-input>
-                </el-form-item>
-                <el-form-item>
-                  <el-button type="primary" @click="submitForm('ruleForm')">立即注册</el-button>
-                  <el-button @click="resetForm('ruleForm')">重置</el-button>
-                </el-form-item>
-              </el-form>
-            </div>
-          </el-col>
-          <el-col :span="10">
-            <div>
-              <h3>立即登录</h3>
-              <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="手机号" prop="name">
-                  <el-input v-model="ruleForm.name" style="width: 40%"></el-input>
-                </el-form-item>
-                <el-form-item label="密码" prop="region">
-                  <el-input v-model="ruleForm.region" style="width: 40%" placeholder="请选择活动区域"></el-input>
-                </el-form-item>
-                <el-form-item>
-                  <el-button type="primary" @click="submitForm('ruleForm')">立即登录</el-button>
-                  <el-button @click="resetForm('ruleForm')">重置</el-button>
-                </el-form-item>
-              </el-form>
-            </div>
-          </el-col>
+    <div style="height: 40px;padding-left: 100px;border-bottom: 3px #00ae66 solid;">
+        <h2 style="color: #00ae66;cursor: pointer" @click="indexShow">万径房产</h2>
+    </div>
+    <div class="bg">
+      <div style="width: 320px;margin: 0 auto;background: #fff;padding: 40px">
+        <el-row>
+          <h2 style="color: #000">账号密码登录</h2>
         </el-row>
-      </el-main>
+        <el-form ref="form" :model="form" label-width="0px">
+          <el-form-item label="">
+            <el-input type="text" v-model="form.username" placeholder="请输入手机号"></el-input>
+          </el-form-item>
+          <el-form-item label="">
+            <el-input type="password" v-model="form.password" placeholder="请输入密码"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="success" @click="onSubmit" class="cbtn-bg">立即登录</el-button>
+          </el-form-item>
+        </el-form>
+        <el-row style="line-height: 30px;color: #376699;font-size: 14px">
+          <span style="cursor: pointer" @click="register">立即注册</span>
+          <span style="float: right;cursor: pointer" @click="forget">忘记密码</span>
+        </el-row>
+        <el-row style="text-align: center;color: #999999;font-size: 12px;line-height: 50px">
+          <span style="cursor: pointer">我已阅读并接受 《万径用户服务协议》及 《万径隐私政策》</span>
+        </el-row>
+      </div>
 
-    </el-container>
-    <cfooter></cfooter>
+    </div>
+    <cfooter style="position: absolute;bottom: 0px"></cfooter>
   </div>
 </template>
 <script>
@@ -59,38 +45,22 @@
     data() {
       return {
         ruleForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          username: '',
+          password:''
         },
         rules: {
-          name: [
-            {required: true, message: '请输入活动名称', trigger: 'blur'},
-            {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+          username: [
+            {required: true, message: '请输入手机号', trigger: 'blur'},
+            {min: 11, max: 11, message: '请输入长度为11位的手机号', trigger: 'blur'}
           ],
-          region: [
-            {required: true, message: '请选择活动区域', trigger: 'change'}
-          ],
-          date1: [
-            {type: 'date', required: true, message: '请选择日期', trigger: 'change'}
-          ],
-          date2: [
-            {type: 'date', required: true, message: '请选择时间', trigger: 'change'}
-          ],
-          type: [
-            {type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change'}
-          ],
-          resource: [
-            {required: true, message: '请选择活动资源', trigger: 'change'}
-          ],
-          desc: [
-            {required: true, message: '请填写活动形式', trigger: 'blur'}
+          password: [
+            {required: true, message: '请输入密码', trigger: 'blur'},
+            {min: 6, max: 12, message: '长度在 6 到 12 位的密码', trigger: 'blur'}
           ]
+        },
+        form: {
+          username: '',
+          password: ''
         }
       };
     },
@@ -107,21 +77,43 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      register() {
+        alert("立即注册");
+      },
+      forget() {
+        alert("忘记密码");
+      },
+      indexShow(){
+        this.$router.push({path:'/'});
       }
     }
   }
 </script>
 
-<style>
+<style scoped>
   .bg {
-    background-image: url("~@/assets/img/bannerV2.jpg");
+    background-image: url("../../assets/img/bg-login.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     height: 700px;
     color: #E9EEF3;
+    padding-top: 150px;
   }
 
+  .el-form-item__label{
+    color: #000000;
+  }
   .el-form-item__label {
     color: #E9EEF3;
+  }
+
+  .cbtn-bg{
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    background: #00ae66;
+    border: none;
+    border-radius: 0px
   }
 </style>
