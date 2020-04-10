@@ -36,6 +36,17 @@
 
 
       </el-container>
+      
+      <div style="width:50%;margin:0 auto;height: 100px;">
+        <el-row>
+          <el-col :span="12" style="text-align: center;">
+            
+          </el-col>
+          <el-col :span="12" style="text-align: center;">
+            而首付
+          </el-col>
+        </el-row>
+      </div>
       <el-container>
         <el-main>
           <el-row class="capp">
@@ -92,82 +103,24 @@
         </el-header>
         <el-main>
           <el-row type="flex" justify="center" :gutter="40">
-            <el-col :span="4">
+            <el-col :span="4" v-for="item in list" :key="item.id" style="cursor:pointer">
               <el-row style="text-align: center">
-                <el-image :src="ershouImage" style="width: 100%;height: 230px;"></el-image>
+                <el-image :src="item.house_image[0]" style="width: 100%;height: 230px;"></el-image>
               </el-row>
-              <el-row>
-                <span>昌平</span>
+              <el-row class="crow">
+                <span>{{item.city}}-</span>
+                <span>{{item.county}}</span>
               </el-row>
-              <el-row>
-                <span>田露元</span>
+              <el-row class="crow">
+                <span style="font-weight:bold">{{item.house_title}}</span>
               </el-row>
-              <el-row>
+              <el-row class="crow">
                 <el-col :span="12">
-                  <span>2室1厅·98.19平米</span>
+                  <span>{{item.house_type}}</span>
+                  <span>{{item.area}}</span>
                 </el-col>
                 <el-col :span="12" style="text-align: right">
-                  <span>400万</span>
-                </el-col>
-              </el-row>
-
-            </el-col>
-            <el-col :span="4">
-              <el-row style="text-align: center">
-                <el-image :src="ershouImage" style="width: 100%;height: 230px;"></el-image>
-              </el-row>
-              <el-row>
-                <span>昌平</span>
-              </el-row>
-              <el-row>
-                <span>田露元</span>
-              </el-row>
-              <el-row>
-                <el-col :span="12">
-                  <span>2室1厅·98.19平米</span>
-                </el-col>
-                <el-col :span="12" style="text-align: right">
-                  <span>400万</span>
-                </el-col>
-              </el-row>
-
-            </el-col>
-            <el-col :span="4">
-              <el-row style="text-align: center">
-                <el-image :src="ershouImage" style="width: 100%;height: 230px;"></el-image>
-              </el-row>
-              <el-row>
-                <span>昌平</span>
-              </el-row>
-              <el-row>
-                <span>田露元</span>
-              </el-row>
-              <el-row>
-                <el-col :span="12">
-                  <span>2室1厅·98.19平米</span>
-                </el-col>
-                <el-col :span="12" style="text-align: right">
-                  <span>400万</span>
-                </el-col>
-              </el-row>
-
-            </el-col>
-            <el-col :span="4">
-              <el-row style="text-align: center">
-                <el-image :src="ershouImage" style="width: 100%;height: 230px;"></el-image>
-              </el-row>
-              <el-row>
-                <span>昌平</span>
-              </el-row>
-              <el-row>
-                <span>田露元</span>
-              </el-row>
-              <el-row>
-                <el-col :span="12">
-                  <span>2室1厅·98.19平米</span>
-                </el-col>
-                <el-col :span="12" style="text-align: right">
-                  <span>400万</span>
+                  <span style="color: red">{{item.house_price}}万</span>
                 </el-col>
               </el-row>
 
@@ -188,6 +141,7 @@
     </div>
 </template>
 <script>
+import oldHouseApi from '@/api/oldhouse'
   (function(m, ei, q, i, a, j, s) {
     m[i] = m[i] || function() {
       (m[i].a = m[i].a || []).push(arguments)
@@ -211,6 +165,8 @@
       data() {
         return {
           city:'',
+          searchMap: {},
+          list: [],
           activeIndex: '1',
           activeIndex2: '1',
           searchContent: '',
@@ -220,6 +176,7 @@
       },
       mounted () {
         this.ready();
+        this.initOldHose()
       },
       methods: {
         ready() {
@@ -239,6 +196,11 @@
         },
         business(){
           window.location.href='https://shangye.lianjia.com/bj/xzl/rent/mlist';
+        },
+        initOldHose() {
+          oldHouseApi.search(1,4,this.searchMap).then(response=>{
+            this.list = response.data.rows
+          })
         }
       }
     }
@@ -288,6 +250,10 @@
   .input>>>.el-input__inner{
     height: 50px;
     border-radius: 0px;
+  }
+
+  .crow{
+    padding: 10px 0px;
   }
 
 </style>

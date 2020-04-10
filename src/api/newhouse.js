@@ -43,5 +43,11 @@ export default {
       url: `/${group_name}/${api_name}/${id}`,
       method: 'delete'
     })
+  },
+  count() {
+    return request({
+      url: `/${group_name}/${api_name}/count`,
+      method: 'get'
+    })
   }
 }
