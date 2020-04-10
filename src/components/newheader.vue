@@ -43,14 +43,14 @@
         name: "newheader",
         data() {
             return {
-                city:'',
+        
                 activeIndex: '1',
                 activeIndex2: '1',
                 input:''
             };
         },
         mounted () {
-          this.ready();
+
           this.activeIndex =  this.$route.path;
         },
         methods: {
