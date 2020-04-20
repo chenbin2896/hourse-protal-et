@@ -247,6 +247,10 @@
         mounted() {
             console.log(this.$route.params.id)
         },
+        created() {
+            var id = this.$route.params.id;
+            alert(id)
+        }
     }
 </script>
 

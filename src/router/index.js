@@ -65,6 +65,12 @@ export default new Router({
       component: ()=>import('@/view/oldHouse/index'),
       hidden: true
     },
+    {
+      path: '/oldHouse/info/:id',
+      name: 'info',
+      component: ()=>import('@/view/oldHouse/info'),
+      hidden: true
+    },
     //-------------------------------------------
     //租房
     {
@@ -86,6 +92,12 @@ export default new Router({
       path: '/newHouse/',
       name: 'index',
       component: ()=>import('@/view/newHouse/index'),
+      hidden: true
+    },
+    {
+      path: '/newHouse/info/:id',
+      name: 'info',
+      component: ()=>import('@/view/newHouse/info'),
       hidden: true
     },
 

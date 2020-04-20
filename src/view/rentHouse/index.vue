@@ -89,7 +89,7 @@
             style="height: 200px;padding-top:20px;cursor:pointer;border-bottom: 1px #DCDFE6 solid"
             v-for="item in list"
             :key="item.id"
-          >
+          @click.native="info(item.id)">
             <el-col :span="4" style="height: 100%;">
               <el-row style="height: 90%;">
                 <el-image :src="item.image[0]" style="height: 100%;"></el-image>
@@ -113,9 +113,8 @@
               </el-row>
             </el-col>
             <el-col :span="4" style="height: 100%;">
-              <span style="color:red;font-weight: bold;font-size: 28px">{{item.rent}}万</span>
+              <span style="color:red;font-weight: bold;font-size: 28px">{{item.rent}}元/月</span>
               <br />
-              <span style="line-height: 30px">单价：暂无</span>
             </el-col>
           </el-row>
         </el-col>
@@ -174,6 +173,9 @@ export default {
           this.list = response.data.rows;
           this.total = response.data.total;
         });
+    },
+    info(id) {
+        this.$router.push('/rentHouse/info/'+id)
     }
   }
 };

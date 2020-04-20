@@ -43,7 +43,7 @@
         </el-row>
         <el-row style="width: 60%;margin: 0 auto" :gutter="20"  >
           <el-col :span="12" v-for="item in list"
-            :key="item.id" style="height:220px;overflow:hidden;cursor:pointer">
+            :key="item.id" style="height:220px;overflow:hidden;cursor:pointer" @click.native="info(item.id)">
             <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
               <el-col :span="9" style="padding: 0px">
                 <el-image :src="item.image[0]" style="height: 180px;"></el-image>
@@ -56,14 +56,14 @@
               </el-col>
             </el-row>
           </el-col>
-        
+
         </el-row>
         <el-row style="text-align: center;">
           <h1>推荐楼盘</h1>
         </el-row>
         <el-row style="width: 60%;margin: 0 auto" :gutter="20">
           <el-col :span="12" v-for="item in list"
-            :key="item.id" style="height:220px;overflow:hidden;cursor:pointer">
+            :key="item.id" style="height:220px;overflow:hidden;cursor:pointer" @click.native="info(item.id)">
             <el-row style="background: #f7f7f7;padding-left: 0px;margin: 10px">
               <el-col :span="9" style="padding: 0px">
                 <el-image :src="item.image[1]" style="height: 180px;"></el-image>
@@ -76,7 +76,7 @@
               </el-col>
             </el-row>
           </el-col>
-          
+
         </el-row>
       </el-main>
     </el-container>
@@ -119,6 +119,9 @@ export default {
           this.list = response.data.rows;
           this.total = response.data.total;
         });
+    },
+    info(id) {
+        this.$router.push('/newHouse/info/'+id)
     }
   }
 };

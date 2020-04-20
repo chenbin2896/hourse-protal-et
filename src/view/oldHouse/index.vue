@@ -89,7 +89,7 @@
             style="height: 200px;padding-top:20px;cursor:pointer;border-bottom: 1px #DCDFE6 solid"
             v-for="item in list"
             :key="item.id"
-          >
+          @click.native="info(item.id)">
             <el-col :span="4" style="height: 100%;">
               <el-row style="height: 90%;">
                 <el-image :src="item.house_image[0]" style="height: 100%;"></el-image>
@@ -174,6 +174,9 @@ export default {
           this.list = response.data.rows;
           this.total = response.data.total;
         });
+    },
+    info(id) {
+        this.$router.push('/oldHouse/info/'+id)
     }
   }
 };

@@ -52,7 +52,7 @@
             <span style="color:#fff;cursor:pointer;padding-left:20px;" @click="searchType('3')">找租房</span>
           </el-col>
         </el-row>
-      
+
         <el-row class="csearch" type="flex" justify="center">
           <el-col :span="8">
             <el-input
@@ -69,7 +69,7 @@
     <el-container>
       <div style="width:50%;margin:20px auto;height: 200px;">
         <el-row>
-          <el-col :span="12" style="text-align: center;cursor:pointer">
+          <el-col :span="12" style="text-align: center;">
             <el-row>
               <el-image
                 :src="require('../../assets/25be787db406f85a8c1ed76bce2c8b1c.png')"
@@ -77,15 +77,17 @@
               ></el-image>
             </el-row>
             <el-row style="line-height:40px;font-size:18px;">
-              <span @click="send('/oldHouse')">找二手房</span>
+              <span @click="send('/oldHouse')" style="cursor:pointer">找二手房</span>
             </el-row>
             <el-row style="line-height:40px;font-size:12px;color:grey">真实二手房源，万径承诺真实在售 所见即真</el-row>
           </el-col>
-          <el-col :span="12" style="text-align: center;cursor:pointer" @click="send('/tool')">
+          <el-col :span="12" style="text-align: center;" >
             <el-row>
               <el-image :src="require('../../assets/phphnmv10.png')" style="width:80px;height:80px"></el-image>
             </el-row>
-            <el-row style="line-height:40px;font-size:18px;">购房工具</el-row>
+            <el-row style="line-height:40px;font-size:18px;" >
+              <span @click="send('/tool')" style="cursor:pointer" >找二手房</span>
+            </el-row>
             <el-row style="line-height:40px;font-size:12px;color:grey">复杂的房贷税费计算，万径购房工具帮你解决</el-row>
           </el-col>
         </el-row>
@@ -147,7 +149,7 @@
       </el-header>
       <el-main>
         <el-row type="flex" justify="center" :gutter="40">
-          <el-col :span="4" v-for="item in list" :key="item.id" style="cursor:pointer">
+          <el-col :span="4" v-for="item in list" :key="item.id" style="cursor:pointer" @click.native="info(item.id)">
             <el-row style="text-align: center">
               <el-image :src="item.house_image[0]" style="width: 100%;height: 230px;"></el-image>
             </el-row>
@@ -259,14 +261,17 @@ export default {
     },
     searchType(type) {
       this.houseType = type;
-    
+
       if(type == 2) {
         this.searchPlaceHolder = '请输入楼盘名称开始找房';
       }else {
         this.searchPlaceHolder = '请输入区域、商区或小区名开始找房';
       }
-      
-    
+
+
+    },
+    info(id) {
+        this.$router.push('/oldHouse/info/'+id)
     }
   }
 };

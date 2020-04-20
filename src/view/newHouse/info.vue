@@ -13,7 +13,7 @@
           </el-row>
           <el-row>
             <el-col :span="14" style="padding-top: 10px;padding-left:15px;">
-              <h2>{{pojo.house_title}}</h2>
+<!--              <h2>{{pojo.house_title}}</h2>-->
             </el-col>
 
           </el-row>
@@ -24,11 +24,7 @@
       <el-container>
         <el-main >
           <el-row>
-<!--            <h1>{{pojo.house_title}}</h1>-->
-          </el-row>
-          <el-row>
-            <span style="color:#606266;line-height: 30px;">房源维护时间：{{pojo.bailor_time}} </span><br>
-            <span style="color:#606266">房源编号：{{pojo.id}} </span>
+            <h1>{{pojo.house_title}}</h1>
           </el-row>
           <el-row style="margin-top: 20px;" gutter="50">
             <el-col :span="14" >
@@ -40,7 +36,7 @@
               <div style ="width:100%;height:400px;">
                 <el-row>
                   <el-col>
-                    <span style="font-weight: bold;font-size: 30px;color: red">{{pojo.rent}}元/月</span>
+                    <span style="font-weight: bold;font-size: 30px;color: red">{{pojo.price}}万</span>
                   </el-col>
                 </el-row>
                 <el-row style="margin-top: 20px">
@@ -51,17 +47,17 @@
                 <el-divider></el-divider>
                 <el-row>
                   <el-col>
-                    <span style="color: #606266;line-height: 26px;">房型：<span>{{pojo.type}}</span></span>
+                    <span style="color: #606266;line-height: 26px;">项目地址：<span>{{pojo.address}}</span></span>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col>
-                    <span style="color: #606266;line-height: 26px;">所在楼层：<span>{{pojo.floor}}</span></span>
+                    <span style="color: #606266;line-height: 26px;">最新开盘：<span>{{pojo.last_opeing}}</span></span>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col>
-                    <span style="color: #606266;line-height: 26px;">房屋朝向：<span>{{pojo.orientation}}</span></span>
+                    <span style="color: #606266;line-height: 26px;">楼盘户型：<span>{{pojo.floor_type}}</span></span>
                   </el-col>
                 </el-row>
                 <el-divider></el-divider>
@@ -89,20 +85,20 @@
                 <span>基本信息</span>
               </el-col>
               <el-col :span="6">
-                <el-row style="line-height: 30px;">房屋户型：{{pojo.type}}</el-row>
-                <el-row style="line-height: 30px;">租房方式：{{pojo.rent_way}}</el-row>
-                <el-row style="line-height: 30px;">委托人：{{pojo.bailor}}</el-row>
-                <el-row style="line-height: 30px;">房屋朝向：{{pojo.orientation}}</el-row>
-                <el-row style="line-height: 30px;">房屋面积：{{pojo.square}}</el-row>
-                <el-row style="line-height: 30px;">配套电梯：{{pojo.elevator}}</el-row>
+                <el-row style="line-height: 30px;">建筑类型：{{pojo.architecture_type}}</el-row>
+                <el-row style="line-height: 30px;">绿化率：{{pojo.greeting_rate}}</el-row>
+                <el-row style="line-height: 30px;">占地面积：{{pojo.occupation}}</el-row>
+                <el-row style="line-height: 30px;">容积率：{{pojo.volume_rate}}</el-row>
+                <el-row style="line-height: 30px;">建筑面积：{{pojo.architecture_area}}</el-row>
+                <el-row style="line-height: 30px;">物业类型：{{pojo.property_type}}</el-row>
 
               </el-col>
               <el-col :span="6">
-                <el-row style="line-height: 30px;">所在楼层：{{pojo.floor}}</el-row>
-                <el-row style="line-height: 30px;">租期：{{pojo.tenancy}}</el-row>
-                <el-row style="line-height: 30px;">取暖：{{pojo.heater}}</el-row>
-                <el-row style="line-height: 30px;">燃气：{{pojo.gas}}</el-row>
-                <el-row style="line-height: 30px;">用电：{{pojo.electricity}}</el-row>
+                <el-row style="line-height: 30px;">规划户数：{{pojo.plan_household}}</el-row>
+                <el-row style="line-height: 30px;">产权年限：{{pojo.property_year}}</el-row>
+                <el-row style="line-height: 30px;">楼盘户型：{{pojo.floor_type}}</el-row>
+                <el-row style="line-height: 30px;">物业公司：{{pojo.property_management}}</el-row>
+                <el-row style="line-height: 30px;">车位配比：{{pojo.parking}}</el-row>
               </el-col>
             </el-row>
             <el-row style="margin-top: 20px">
@@ -125,7 +121,7 @@
             </el-row>
           </el-row>
           <el-row>
-            <h2>房源照片</h2>
+            <h2>楼盘图片</h2>
             <el-row style="margin-bottom: 20px;" gutter="50">
               <el-col :span="8" style="line-height: 28px" v-for="item in pojo.image" :key="item.id">
                 <el-image :src="item" style="width: 100%;height: 100%"></el-image>
@@ -191,7 +187,7 @@
 
 <script type="text/javascript">
   import cheader from "@/components/newheader";
-  import resourceApi from "@/api/resource";
+  import newHouseApi from "@/api/newhouse";
   import informationApi from "@/api/information";
   import BMap from 'BMap'
     export default {
@@ -202,8 +198,8 @@
                 zoom: 3,
                 pojo: {},
                 agent:{},
-                agents:[],
-                activeIndex:'/oldHouse/info'
+                agents:[]
+
             }
         },
         mounted() {
@@ -218,7 +214,7 @@
                 this.zoom = 15
             },
             ready() {
-                resourceApi.findById(this.$route.params.id).then(response=>{
+                newHouseApi.findById(this.$route.params.id).then(response=>{
                     this.pojo = response.data
                 })
                 informationApi.getList().then(response=>{
