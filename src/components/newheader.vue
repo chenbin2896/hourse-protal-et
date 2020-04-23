@@ -22,7 +22,7 @@
                   <el-menu-item index="7-2">最近联系</el-menu-item>
                   <el-menu-item index="7-3">浏览记录</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="/login" style="float: right">登录注册</el-menu-item>
+                <el-menu-item index="/login" style="float: right">{{loginOrRegis}}</el-menu-item>
                 <!--            <el-menu-item index="10" style="float: right">注册</el-menu-item>-->
               </el-menu>
            <!-- </el-col>
@@ -38,16 +38,36 @@
 </template>
 
 <script>
-
+    import store from '../store'
+    import {getToken} from '@/utils/auth' // 验权
+    import { mapGetters } from 'vuex'
     export default {
         name: "newheader",
+        computed: {
+            ...mapGetters([
+                'name'
+            ])
+
+        },
         data() {
             return {
-        
+
                 activeIndex: '1',
                 activeIndex2: '1',
-                input:''
+                input:'',
+                loginOrRegis:'登录注册'
             };
+        },
+        created() {
+          if(getToken()) {
+              store.dispatch('GetInfo').then(res => { // 拉取用户信息
+                  this.loginOrRegis = this.name
+              }).catch((err) => {
+                  alert("获取用户信息失败")
+              })
+          }else{
+
+          }
         },
         mounted () {
 
@@ -70,7 +90,9 @@
               window.open('https://www.lianjia.com/client/');
           },
           logout(){
-              this.$router.push({path:'/'});
+              this.$store.dispatch('LogOut').then(() => {
+                  location.reload() // 为了重新实例化vue-router对象 避免bug
+              })
           }
         }
     }

@@ -1,13 +1,22 @@
 import request from '@/utils/request'
 
-export function login(bname, password) {
+export function login(username, password,usertype) {
   return request({
     url: '/rent/user/login',
     method: 'post',
     data: {
-      bname,
-      password
+      username,
+      password,
+      usertype
     }
+  })
+}
+
+export function register(pojo) {
+  return request({
+    url: '/rent/user',
+    method: 'post',
+    data: pojo
   })
 }
 
