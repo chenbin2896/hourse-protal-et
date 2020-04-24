@@ -120,7 +120,7 @@
                                 type: (response.flag ? 'success' : 'error')
                             })
                             if (response.flag) { // 如果成功
-                                this.$router.push({path: '/oldHouse'}) // 刷新列表
+                                this.$router.push({path: '/login'}) // 刷新列表
                             }
                         })
                     } else {

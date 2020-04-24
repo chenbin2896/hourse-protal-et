@@ -13,7 +13,7 @@
                 <el-menu-item index="/agent">经纪人</el-menu-item>
                 <el-menu-item index="/publish">发布房源</el-menu-item>
                 <el-menu-item index="/tool">工具</el-menu-item>
-                <el-menu-item @click="download">万径APP</el-menu-item>
+<!--                <el-menu-item @click="download">万径APP</el-menu-item>-->
 
                 <el-menu-item @click="logout" style="float: right">退出</el-menu-item>
                 <el-submenu index="person" style="float: right">
@@ -22,7 +22,7 @@
                   <el-menu-item index="7-2">最近联系</el-menu-item>
                   <el-menu-item index="7-3">浏览记录</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="/login" style="float: right">{{loginOrRegis}}</el-menu-item>
+                <el-menu-item @click="center" style="float: right">{{loginOrRegis}}</el-menu-item>
                 <!--            <el-menu-item index="10" style="float: right">注册</el-menu-item>-->
               </el-menu>
            <!-- </el-col>
@@ -93,7 +93,14 @@
               this.$store.dispatch('LogOut').then(() => {
                   location.reload() // 为了重新实例化vue-router对象 避免bug
               })
-          }
+          },
+            center() {
+                if (this.loginOrRegis === '登录注册') {
+                    this.$router.push({path:'/login'})
+                }else{
+                    this.$router.push({path:'/center'})
+                }
+            }
         }
     }
 </script>

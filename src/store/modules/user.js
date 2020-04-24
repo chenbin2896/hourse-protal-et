@@ -25,6 +25,9 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_UID: (state, uid) => {
+      state.uid = uid
     }
   },
 
@@ -69,6 +72,7 @@ const user = {
         getInfo(state.token).then(response => {
           const data = response.data
           commit('SET_ROLES', data.roles)
+          commit('SET_UID', data.uid)
           commit('SET_NAME', data.name)
           commit('SET_MOBILE', data.mobile)
           commit('SET_AVATAR', data.avatar)

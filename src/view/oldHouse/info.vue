@@ -1,43 +1,43 @@
 <template>
-    <div>
-      <cheader></cheader>
-      <div style="height: 180px;background: #f5f5f6;width: 100%">
-        <div style="width: 60%;margin:  0 auto;">
-          <el-row>
-            <el-col :span="5" style="padding-left:15px;">
-              <h2 style="color: #00ae66;">万径房产</h2>
-            </el-col>
-            <el-col :span="19" style="text-align: right">
-              <span style="line-height: 70px">下载万径APP</span>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="14" style="padding-top: 10px;padding-left:15px;">
-              <h2>{{pojo.house_title}}</h2>
-            </el-col>
+  <div>
+    <cheader></cheader>
+    <div style="height: 180px;background: #f5f5f6;width: 100%">
+      <div style="width: 60%;margin:  0 auto;">
+        <el-row>
+          <el-col :span="5" style="padding-left:15px;">
+            <h2 style="color: #00ae66;">万径房产</h2>
+          </el-col>
+          <el-col :span="19" style="text-align: right">
+            <span style="line-height: 70px">下载万径APP</span>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="14" style="padding-top: 10px;padding-left:15px;">
+            <h2>{{pojo.house_title}}</h2>
+          </el-col>
 
-          </el-row>
+        </el-row>
 
-        </div>
       </div>
-      <div style="width: 60%;margin: 0 auto;">
+    </div>
+    <div style="width: 60%;margin: 0 auto;">
       <el-container>
-        <el-main >
+        <el-main>
           <el-row>
-<!--            <h1>{{pojo.house_title}}</h1>-->
+            <!--            <h1>{{pojo.house_title}}</h1>-->
           </el-row>
           <el-row>
             <span style="color:#606266;line-height: 30px;">房源维护时间：{{pojo.hang_time}} </span><br>
             <span style="color:#606266">房源编号：{{pojo.id}} </span>
           </el-row>
-          <el-row style="margin-top: 20px;" gutter="50">
-            <el-col :span="14" >
+          <el-row style="margin-top: 20px;" :gutter="50">
+            <el-col :span="14">
               <div style="width:100%;height:400px;">
                 <el-image :src="pojo.house_image[0]" style="width: 100%;height: 100%"></el-image>
               </div>
             </el-col>
-            <el-col :span="10" >
-              <div style ="width:100%;height:400px;">
+            <el-col :span="10">
+              <div style="width:100%;height:400px;">
                 <el-row>
                   <el-col>
                     <span style="font-weight: bold;font-size: 30px;color: red">{{pojo.house_price}}万</span>
@@ -65,7 +65,7 @@
                   </el-col>
                 </el-row>
                 <el-divider></el-divider>
-                <el-row >
+                <el-row>
                   <el-col :span="6">
                     <el-image style="width: 80px;height: 80px;border-radius: 50%" :src="agent.photograph"></el-image>
                   </el-col>
@@ -76,7 +76,8 @@
                 </el-row>
                 <el-row>
                   <el-col :span="24">
-                    <el-button type="success" style="margin: 10px;" size="medium">在线咨询</el-button>
+                    <el-button type="success" style="margin: 10px;" size="medium" @click="sendMessage(agent.id)">在线咨询
+                    </el-button>
                   </el-col>
                 </el-row>
               </div>
@@ -126,7 +127,7 @@
           </el-row>
           <el-row>
             <h2>房源照片</h2>
-            <el-row style="margin-bottom: 20px;" gutter="50">
+            <el-row style="margin-bottom: 20px;" :gutter="50">
               <el-col :span="8" style="line-height: 28px" v-for="item in pojo.house_image" :key="item.id">
                 <el-image :src="item" style="width: 100%;height: 100%"></el-image>
               </el-col>
@@ -165,7 +166,7 @@
                       <span>{{item.bname}}</span><br>
                       <span>评分:{{item.grade}} | 20次评价</span>
                       <span>{{item.contact}}</span>
-                      <span><el-button type="success" size="mini">在线咨询</el-button></span>
+                      <span><el-button type="success" size="mini" @click="sendMessage(item.id)">在线咨询</el-button></span>
                     </el-col>
                   </el-row>
                 </el-card>
@@ -183,52 +184,164 @@
         </el-main>
 
       </el-container>
-      </div>
+      <el-dialog
+        title="在线咨询"
+        :visible.sync="centerDialogVisible"
+        width="30%"
+        center>
+        <div style="background: #f2f2f2;height: 400px;overflow: auto;padding: 10px" >
+          <el-row>
+            <h3>{{data}}</h3>
+          </el-row>
+          <div v-html="content"></div>
+        </div>
+        <div style="margin-top: 20px">
+          <el-input
+            type="textarea"
+            autosize
+            placeholder="请输入内容"
+            v-model="messagePojo.msg">
+          </el-input>
+        </div>
+
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">关闭</el-button>
+    <el-button type="success" @click="send">发送</el-button>
+  </span>
+      </el-dialog>
     </div>
+  </div>
 
 
 </template>
 
 <script type="text/javascript">
-  import cheader from "@/components/newheader";
-  import oldHouseApi from "@/api/oldhouse";
-  import informationApi from "@/api/information";
-  import BMap from 'BMap'
+    import cheader from "@/components/newheader";
+    import oldHouseApi from "@/api/oldhouse";
+    import informationApi from "@/api/information";
+    import BMap from 'BMap'
+    import { mapGetters } from 'vuex'
     export default {
         name: "info",
-        data () {
+        computed: {
+            ...mapGetters([
+                'name',
+                'uid'
+            ])
+
+        },
+        data() {
             return {
                 center: {lng: 0, lat: 0},
                 zoom: 3,
                 pojo: {},
-                agent:{},
-                agents:[],
-                activeIndex:'/oldHouse/info'
+                agent: {},
+                agents: [],
+                activeIndex: '/oldHouse/info',
+                centerDialogVisible: false,
+                icon:'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+                messageAgent:{},
+                messagePojo:{
+                    toId:'',
+                    msg:''
+                },
+                websocket: null,
+                data:'',
+                content:''
             }
         },
         mounted() {
             console.log(this.$route.params.id)
             this.ready()
+            if ('WebSocket' in window) {
+                this.websocket = new WebSocket('ws://cyichen.mynatapp.cc/rent/ws/'+this.uid)
+                this.initWebSocket()
+            } else {
+                alert('当前浏览器 Not support websocket')
+            }
         },
-        methods :{
-            handler ({BMap, map}) {
+        beforeDestroy() {
+            this.onbeforeunload()
+        },
+        methods: {
+            handler({BMap, map}) {
                 console.log(BMap, map)
                 this.center.lng = 116.404
                 this.center.lat = 39.915
                 this.zoom = 15
             },
             ready() {
-                oldHouseApi.findById(this.$route.params.id).then(response=>{
+                oldHouseApi.findById(this.$route.params.id).then(response => {
                     this.pojo = response.data
                 })
-                informationApi.getList().then(response=>{
+                informationApi.getList().then(response => {
                     this.agent = response.data[0]
                     this.agents = response.data
                 })
 
             },
+            sendMessage(id) {
+                informationApi.findById(id).then(response=>{
+                    this.messageAgent = response.data
+                })
+                this.content = ''
+                this.centerDialogVisible = true
+
+
+            },
+            initWebSocket() {
+                //连接错误
+                this.websocket.onerror = this.setErrorMessage
+
+                // //连接成功
+                this.websocket.onopen = this.setOnopenMessage
+
+                //收到消息的回调
+                this.websocket.onmessage = this.setOnmessageMessage
+
+                //连接关闭的回调
+                this.websocket.onclose = this.setOncloseMessage
+
+                //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+                window.onbeforeunload = this.onbeforeunload
+            },
+            setErrorMessage() {
+                this.data = "WebSocket连接发生错误" + '   状态码：' + this.websocket.readyState;
+            },
+            setOnopenMessage() {
+                this.data = "WebSocket连接成功" + '   状态码：' + this.websocket.readyState;
+            },
+            setOnmessageMessage(event) {
+                //this.data = '服务端返回：' + event.data;
+                var temp = JSON.parse(event.data)
+                this.content+="<el-row>\n" +
+                    "            <span style=\"padding: 10px\">"+this.messageAgent.bname+"【万径经纪人】</span><br>\n" +
+                    "            <span style=\"line-height: 30px;display: block;background: #fff;width: 45%;border-radius: 5px;margin: 10px;padding:5px\">"+temp.msg+"</span>\n" +
+                    "          </el-row>"
+            },
+            setOncloseMessage() {
+                this.data = "WebSocket连接关闭" + '   状态码：' + this.websocket.readyState;
+            },
+            onbeforeunload() {
+                this.closeWebSocket();
+            },
+
+            //websocket发送消息
+            send() {
+                this.messagePojo.toId = this.messageAgent.id
+                this.websocket.send(JSON.stringify(this.messagePojo))
+                this.content+="<div style='width: 100%;height: auto'><div style=\"text-align: right;line-height: 10px;margin: 10px\">\n" +
+                    "            <div style=\"padding: 10px;\">"+this.uid+"</div>\n" +
+                    "            <div style=\"line-height: 30px;background: #fff;margin-left:55%;width: 45%;border-radius: 5px;padding:5px\">"+this.messagePojo.msg+"</div>\n" +
+                    "          </div></div>"
+                this.messagePojo.msg = ''
+
+            },
+            closeWebSocket() {
+                this.websocket.close()
+            }
         },
-        components:{
+        components: {
             cheader
         },
 
@@ -237,7 +350,7 @@
 </script>
 
 <style scoped>
- span{
-   color: #606266;
- }
+  span {
+    color: #606266;
+  }
 </style>
