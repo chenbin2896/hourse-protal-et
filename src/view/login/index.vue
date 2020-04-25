@@ -5,7 +5,7 @@
     </div>
     <div class="bg">
       <div style="width: 320px;margin: 0 auto;background: #fff;padding: 40px">
-        <el-row  v-show="loginShow">
+        <el-row v-show="loginShow">
           <el-row>
             <h2 style="color: #000">账号密码登录</h2>
           </el-row>
@@ -30,7 +30,7 @@
             <span style="cursor: pointer">我已阅读并接受 《万径用户服务协议》及 《万径隐私政策》</span>
           </el-row>
         </el-row>
-        <el-row  v-show="!loginShow">
+        <el-row v-show="!loginShow">
           <el-row>
             <h2 style="color: #000">欢迎注册</h2>
           </el-row>
@@ -97,15 +97,15 @@
             handleLogin() {
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
-                        this.loading = true
+                        this.loading = true;
                         this.$store.dispatch('Login', this.loginForm).then(() => {
-                            this.loading = false
-                            this.$router.push({path: '/oldHouse'})
+                            this.loading = false;
+                            location.reload()
                         }).catch(() => {
                             this.loading = false
                         })
                     } else {
-                        console.log('error submit!!')
+                        console.log('error submit!!');
                         return false
                     }
                 })
@@ -113,18 +113,18 @@
             handleRegis() {
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
-                        this.loading = true
-                        userApi.save(this.loginForm).then(response=>{
+                        this.loading = true;
+                        userApi.save(this.loginForm).then(response => {
                             this.$message({
                                 message: response.message,
                                 type: (response.flag ? 'success' : 'error')
-                            })
+                            });
                             if (response.flag) { // 如果成功
                                 this.$router.push({path: '/login'}) // 刷新列表
                             }
                         })
                     } else {
-                        console.log('error submit!!')
+                        console.log('error submit!!');
                         return false
                     }
                 })

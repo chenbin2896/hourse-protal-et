@@ -33,7 +33,7 @@
           <el-row style="margin-top: 20px;" :gutter="50">
             <el-col :span="14">
               <div style="width:100%;height:400px;">
-                <el-image :src="pojo.house_image[0]" style="width: 100%;height: 100%"></el-image>
+                <el-image :src="pojo.house_image[2]" style="width: 100%;height: 100%"></el-image>
               </div>
             </el-col>
             <el-col :span="10">
@@ -111,7 +111,7 @@
                 <span>看房</span>
               </el-col>
               <el-col :span="6">
-                <el-button type="primary" size="mini">预约看房</el-button>
+                <el-button type="primary" size="middle" @click="requestHouseFlag = true">预约看房</el-button>
 
               </el-col>
 
@@ -189,7 +189,7 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-        <div style="background: #f2f2f2;height: 400px;overflow: auto;padding: 10px" >
+        <div style="background: #f2f2f2;height: 400px;overflow: auto;padding: 10px">
           <el-row>
             <h3>{{data}}</h3>
           </el-row>
@@ -209,6 +209,30 @@
     <el-button type="success" @click="send">发送</el-button>
   </span>
       </el-dialog>
+      <el-dialog
+        title="预约看房"
+        :visible.sync="requestHouseFlag"
+        width="30%"
+        center>
+        <div style="background: #fff;height: 400px;overflow: auto;padding: 10px">
+          <el-form label-width="80px" :model="request" :rules="loginRules" ref="loginForm">
+            <el-form-item label="姓名" prop="bname">
+              <el-input v-model="request.bname"></el-input>
+            </el-form-item>
+            <el-form-item label="手机号" prop="mobile">
+              <el-input v-model="request.mobile"></el-input>
+            </el-form-item>
+            <el-form-item label="预约时间" prop="request_date">
+              <el-date-picker v-model="request.request_date" value-format="yyyy-MM-dd"></el-date-picker>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click.native.prevent="submitRequest">提交</el-button>
+              <el-button @click="requestHouseFlag = false">关闭</el-button>
+            </el-form-item>
+
+          </el-form>
+        </div>
+      </el-dialog>
     </div>
   </div>
 
@@ -219,8 +243,10 @@
     import cheader from "@/components/newheader";
     import oldHouseApi from "@/api/oldhouse";
     import informationApi from "@/api/information";
+    import requestApi from "@/api/request";
     import BMap from 'BMap'
-    import { mapGetters } from 'vuex'
+    import {mapGetters} from 'vuex'
+
     export default {
         name: "info",
         computed: {
@@ -239,22 +265,40 @@
                 agents: [],
                 activeIndex: '/oldHouse/info',
                 centerDialogVisible: false,
-                icon:'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-                messageAgent:{},
-                messagePojo:{
-                    toId:'',
-                    msg:''
+                messageAgent: {},
+                messagePojo: {
+                    toId: '',
+                    msg: ''
                 },
                 websocket: null,
-                data:'',
-                content:''
+                data: '',
+                content: '',
+                requestHouseFlag: false,
+                request:{
+                    house_id:""
+                },
+
+                loginRules: {
+                    bname: [
+                        {required: true, message: '请输入联系人姓名', trigger: 'blur'}
+
+                    ],
+                    mobile: [
+                        {required: true, message: '请输入手机号', trigger: 'blur'},
+                        {min: 11, max: 11, message: '请输入长度为11位的手机号', trigger: 'blur'}
+                    ],
+                    request_date: [
+                        {required: true, message: '请输入看房时间', trigger: 'blur'}
+
+                    ],
+                },
             }
         },
         mounted() {
             console.log(this.$route.params.id)
             this.ready()
             if ('WebSocket' in window) {
-                this.websocket = new WebSocket('ws://cyichen.mynatapp.cc/rent/ws/'+this.uid)
+                this.websocket = new WebSocket('ws://cyichen.mynatapp.cc/rent/ws/' + this.uid)
                 this.initWebSocket()
             } else {
                 alert('当前浏览器 Not support websocket')
@@ -281,11 +325,23 @@
 
             },
             sendMessage(id) {
-                informationApi.findById(id).then(response=>{
-                    this.messageAgent = response.data
-                })
-                this.content = ''
-                this.centerDialogVisible = true
+                console.log(this.uid + 'dsfgadfgasd')
+                if (this.uid) {
+                    informationApi.findById(id).then(response => {
+                        this.messageAgent = response.data
+                    })
+                    this.content = ''
+                    this.centerDialogVisible = true
+                } else {
+
+                    /*informationApi.findById(id).then(response=>{
+                        this.messageAgent = response.data
+                    })
+                    this.content = ''
+                    this.centerDialogVisible = true*/
+
+                    this.$router.push({path: '/login'})
+                }
 
 
             },
@@ -314,9 +370,9 @@
             setOnmessageMessage(event) {
                 //this.data = '服务端返回：' + event.data;
                 var temp = JSON.parse(event.data)
-                this.content+="<el-row>\n" +
-                    "            <span style=\"padding: 10px\">"+this.messageAgent.bname+"【万径经纪人】</span><br>\n" +
-                    "            <span style=\"line-height: 30px;display: block;background: #fff;width: 45%;border-radius: 5px;margin: 10px;padding:5px\">"+temp.msg+"</span>\n" +
+                this.content += "<el-row>\n" +
+                    "            <span style=\"padding: 10px\">" + this.messageAgent.bname + "【万径经纪人】</span><br>\n" +
+                    "            <span style=\"line-height: 30px;display: block;background: #fff;width: 45%;border-radius: 5px;margin: 10px;padding:5px\">" + temp.msg + "</span>\n" +
                     "          </el-row>"
             },
             setOncloseMessage() {
@@ -330,15 +386,34 @@
             send() {
                 this.messagePojo.toId = this.messageAgent.id
                 this.websocket.send(JSON.stringify(this.messagePojo))
-                this.content+="<div style='width: 100%;height: auto'><div style=\"text-align: right;line-height: 10px;margin: 10px\">\n" +
-                    "            <div style=\"padding: 10px;\">"+this.uid+"</div>\n" +
-                    "            <div style=\"line-height: 30px;background: #fff;margin-left:55%;width: 45%;border-radius: 5px;padding:5px\">"+this.messagePojo.msg+"</div>\n" +
+                this.content += "<div style='width: 100%;height: auto'><div style=\"text-align: right;line-height: 10px;margin: 10px\">\n" +
+                    "            <div style=\"padding: 10px;\">" + this.uid + "</div>\n" +
+                    "            <div style=\"line-height: 30px;background: #fff;margin-left:55%;width: 45%;border-radius: 5px;padding:5px\">" + this.messagePojo.msg + "</div>\n" +
                     "          </div></div>"
                 this.messagePojo.msg = ''
 
             },
             closeWebSocket() {
                 this.websocket.close()
+            },
+            submitRequest() {
+                console.log(this.request)
+                this.request.house_id = this.$route.params.id
+                this.$refs.loginForm.validate(valid => {
+                    if (valid) {
+                        requestApi.save(this.request).then(response=>{
+                            this.$message({
+                                message: response.message,
+                                type: (response.flag ? 'success' : 'error')
+                            })
+                            this.requestHouseFlag = false
+                        })
+                    } else {
+                        console.log('error submit!!');
+                        return false
+                    }
+                })
+
             }
         },
         components: {

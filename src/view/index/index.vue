@@ -47,9 +47,9 @@
         </el-row>
         <el-row type="flex" justify="center">
           <el-col :span="8" style="text-align: center">
-            <span style="color:#fff;cursor:pointer;padding-left:20px;" @click="searchType('1')">找二手房</span>
-            <span style="color:#fff;cursor:pointer;padding-left:20px;" @click="searchType('2')">找新房</span>
-            <span style="color:#fff;cursor:pointer;padding-left:20px;" @click="searchType('3')">找租房</span>
+            <span style="color:#fff;cursor:pointer;padding-left:20px;" @click="searchType('oldHouse')">找二手房</span>
+            <span style="color:#fff;cursor:pointer;padding-left:20px;" @click="searchType('newHouse')">找新房</span>
+            <span style="color:#fff;cursor:pointer;padding-left:20px;" @click="searchType('rentHouse')">找租房</span>
           </el-col>
         </el-row>
 
@@ -62,7 +62,7 @@
               style="border-radius: 0px;"
             ></el-input>
           </el-col>
-          <el-button type="success" class="cbtn-bg">开始找房</el-button>
+          <el-button type="success" class="cbtn-bg" @click="searchHouse">开始找房</el-button>
         </el-row>
       </el-main>
     </el-container>
@@ -86,7 +86,7 @@
               <el-image :src="require('../../assets/phphnmv10.png')" style="width:80px;height:80px"></el-image>
             </el-row>
             <el-row style="line-height:40px;font-size:18px;" >
-              <span @click="send('/tool')" style="cursor:pointer" >找二手房</span>
+              <span @click="send('/tool')" style="cursor:pointer" >购房计算器</span>
             </el-row>
             <el-row style="line-height:40px;font-size:12px;color:grey">复杂的房贷税费计算，万径购房工具帮你解决</el-row>
           </el-col>
@@ -217,7 +217,7 @@ export default {
     return {
       city: "",
       searchPlaceHolder:'请输入楼盘名称开始找房',
-      houseType: "",
+      houseType: "oldHouse",
       searchMap: {},
       list: [],
       activeIndex: "1",
@@ -262,7 +262,7 @@ export default {
     searchType(type) {
       this.houseType = type;
 
-      if(type == 2) {
+      if(type === 'newHouse') {
         this.searchPlaceHolder = '请输入楼盘名称开始找房';
       }else {
         this.searchPlaceHolder = '请输入区域、商区或小区名开始找房';
@@ -272,6 +272,9 @@ export default {
     },
     info(id) {
         this.$router.push('/oldHouse/info/'+id)
+    },
+    searchHouse(){
+      this.$router.push('/'+this.houseType+'/'+this.searchContent)
     }
   }
 };

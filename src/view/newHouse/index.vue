@@ -106,7 +106,12 @@ export default {
     };
   },
   created() {
-    this.fetchData();
+      if(this.$route.params.content){
+          this.searchMap = {
+              "house_title":this.$route.params.content
+          }
+      }
+      this.fetchData();
   },
   methods: {
     send(path) {
@@ -122,7 +127,13 @@ export default {
     },
     info(id) {
         this.$router.push('/newHouse/info/'+id)
-    }
+    },
+      searchHouse(){
+          this.searchMap = {
+              "house_title":this.searchContent
+          }
+          this.fetchData()
+      }
   }
 };
 </script>

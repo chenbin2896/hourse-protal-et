@@ -60,7 +60,7 @@ export default new Router({
     //-------------------------------------------
     //二手房
     {
-      path: '/oldHouse/',
+      path: '/oldHouse/:content?',
       name: 'index',
       component: ()=>import('@/view/oldHouse/index'),
       hidden: true
@@ -74,7 +74,7 @@ export default new Router({
     //-------------------------------------------
     //租房
     {
-      path: '/rentHouse/',
+      path: '/rentHouse/:content?',
       name: 'index',
       component: ()=>import('@/view/rentHouse/index'),
       hidden: true
@@ -89,7 +89,7 @@ export default new Router({
     //-------------------------------------------
     //新房
     {
-      path: '/newHouse/',
+      path: '/newHouse/:content?',
       name: 'index',
       component: ()=>import('@/view/newHouse/index'),
       hidden: true

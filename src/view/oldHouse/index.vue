@@ -32,7 +32,7 @@
               style="border-radius: 0px"
             ></el-input>
           </el-col>
-          <el-button type="success" class="cbtn-bg">开始找房</el-button>
+          <el-button type="success" class="cbtn-bg" @click="searchHouse">开始找房</el-button>
         </el-row>
       </div>
     </div>
@@ -161,8 +161,23 @@ export default {
     };
   },
   created() {
-    this.fetchData();
+      if(this.$route.params.content){
+          this.searchMap = {
+              "house_title":this.$route.params.content
+          }
+      }
+      this.fetchData();
   },
+    mounted() {
+        console.log(this.$route.params.content)
+        if(this.$route.params.content){
+          this.searchMap = {
+              "house_title":this.$route.params.content
+          }
+        }else{
+
+        }
+    },
   methods: {
     handleSelect(key, keyPath) {
       //alert(keyPath);
@@ -177,7 +192,13 @@ export default {
     },
     info(id) {
         this.$router.push('/oldHouse/info/'+id)
-    }
+    },
+      searchHouse(){
+          this.searchMap = {
+              "house_title":this.searchContent
+          }
+          this.fetchData()
+      }
   }
 };
 </script>
