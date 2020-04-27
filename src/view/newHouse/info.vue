@@ -317,11 +317,15 @@
 
             },
             sendMessage(id) {
-                informationApi.findById(id).then(response=>{
-                    this.messageAgent = response.data
-                })
-                this.content = ''
-                this.centerDialogVisible = true
+                if (this.uid) {
+                    informationApi.findById(id).then(response => {
+                        this.messageAgent = response.data
+                    })
+                    this.content = ''
+                    this.centerDialogVisible = true
+                } else {
+                    this.$router.push({path: '/login'})
+                }
 
 
             },

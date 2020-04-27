@@ -1,5 +1,5 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  BASE_API: '"https://cyichen.mynatapp.cc/"',
+  BASE_API: '"http://cyichen.mynatapp.cc/"',
 }

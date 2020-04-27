@@ -83,6 +83,12 @@
             </el-col>
           </el-row>
           <el-row>
+            <el-col :span="10">真实存在，真实在租，真实价格，假一赔百</el-col>
+            <el-col :span="6" style="text-align: right">
+              <span @click="reportFlag = true" style="cursor: pointer">我要举报</span>
+            </el-col>
+          </el-row>
+          <el-row>
             <h2>房屋信息</h2>
             <el-row>
               <el-col :span="4">
@@ -232,6 +238,24 @@
             </el-form>
           </div>
         </el-dialog>
+        <el-dialog
+          title="房源举报"
+          :visible.sync="reportFlag"
+          width="30%"
+          center>
+          <div style="background: #fff;height: 400px;overflow: auto;padding: 10px">
+            <el-form label-width="80px" :model="request" :rules="loginRules" ref="loginForm">
+              <el-form-item label="举报说明">
+                <el-input v-model="report.report_content"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="submitReport">提交</el-button>
+                <el-button @click="reportFlag = false">关闭</el-button>
+              </el-form-item>
+
+            </el-form>
+          </div>
+        </el-dialog>
       </div>
     </div>
 
@@ -241,6 +265,7 @@
 <script type="text/javascript">
   import cheader from "@/components/newheader";
   import resourceApi from "@/api/resource";
+  import reportApi from "@/api/report";
   import informationApi from "@/api/information";
   import requestApi from "@/api/request";
   import BMap from 'BMap'
@@ -273,7 +298,7 @@
                 content:'',
                 requestHouseFlag: false,
                 request:{},
-
+                report:{},
                 loginRules: {
                     bname: [
                         {required: true, message: '请输入联系人姓名', trigger: 'blur'}
@@ -288,6 +313,7 @@
 
                     ],
                 },
+                reportFlag: false
             }
         },
         mounted() {
@@ -321,11 +347,15 @@
 
             },
             sendMessage(id) {
-                informationApi.findById(id).then(response=>{
-                    this.messageAgent = response.data
-                })
-                this.content = ''
-                this.centerDialogVisible = true
+                if (this.uid) {
+                    informationApi.findById(id).then(response => {
+                        this.messageAgent = response.data
+                    })
+                    this.content = ''
+                    this.centerDialogVisible = true
+                } else {
+                    this.$router.push({path: '/login'})
+                }
 
 
             },
@@ -397,6 +427,21 @@
                     }
                 })
 
+            },
+            submitReport(){
+                if (this.uid) {
+                    this.report.house_id = this.$route.params.id
+                    this.report.user_id = this.uid
+                    reportApi.save(this.report).then(response=>{
+                        this.$message({
+                            message: response.message,
+                            type: (response.flag ? 'success' : 'error')
+                        })
+                        this.reportFlag = false
+                    })
+                } else {
+                    this.$router.push({path: '/login'})
+                }
             }
         },
         components:{

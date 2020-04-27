@@ -333,13 +333,6 @@
                     this.content = ''
                     this.centerDialogVisible = true
                 } else {
-
-                    /*informationApi.findById(id).then(response=>{
-                        this.messageAgent = response.data
-                    })
-                    this.content = ''
-                    this.centerDialogVisible = true*/
-
                     this.$router.push({path: '/login'})
                 }
 
