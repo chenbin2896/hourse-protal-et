@@ -43,5 +43,11 @@ export default {
       url: `/${group_name}/${api_name}/${id}`,
       method: 'delete'
     })
+  },
+  getFocus(uid,htype) {
+    return request({
+      url: `/${group_name}/${api_name}/focus/${uid}/${htype}`,
+      method: 'get'
+    })
   }
 }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-
+import Center from '../view/center/index'
 export default new Router({
   routes: [
     {
@@ -134,6 +134,22 @@ export default new Router({
       name: 'index',
       component: ()=>import('@/view/housePrice/index'),
       hidden: true
+    },
+    //-------------------------------------------
+    //个人中心
+    {
+      path: '/center/',
+      name: 'index',
+      component: ()=>import('@/view/center/index'),
+      hidden: true
+    },
+    {
+      path: '/center/',
+      name: 'index',
+      component: Center,
+      children: [
+        { path: 'house', name: 'house', component: () => import('@/view/center/house')}
+      ]
     },
 
 
